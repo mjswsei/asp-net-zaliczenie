@@ -22,6 +22,6 @@ public class Movie
 	[RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), Required, StringLength(30)]
 	public string Genre { get; set; }
 
-	[RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(5)]
+	[StringLength(30), Required]
 	public string Rating { get; set; }
 }
