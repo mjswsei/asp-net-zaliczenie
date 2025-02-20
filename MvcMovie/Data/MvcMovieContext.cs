@@ -17,8 +17,11 @@ namespace MvcMovie.Data
         }
 
         public DbSet<MvcMovie.Models.Movie> Movie { get; set; } = default!;
+		public DbSet<MvcMovie.Models.Genre> Genre { get; set; } = default!;
+		public DbSet<MvcMovie.Models.Director> Director { get; set; } = default!;
 
-        public class MvcMovieUserEntityConfiguration : IEntityTypeConfiguration<MvcMovieUser>
+
+		public class MvcMovieUserEntityConfiguration : IEntityTypeConfiguration<MvcMovieUser>
 		{
 			public void Configure(EntityTypeBuilder<MvcMovieUser> builder)
 			{

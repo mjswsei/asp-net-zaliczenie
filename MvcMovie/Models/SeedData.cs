@@ -14,45 +14,85 @@ public static class SeedData
 			serviceProvider.GetRequiredService<
 				DbContextOptions<MvcMovieContext>>()))
 		{
-			// Look for any movies.
-			if (context.Movie.Any())
-			{
-				return;   // DB has been seeded
-			}
-			context.Movie.AddRange(
-				new Movie
+			if (!context.Director.Any())
+				context.Director.AddRange(
+					new Director
+					{
+						Name = "Krzysztof Kieślowski",
+						BirthDate = DateTime.Parse("1941-06-27")
+					}
+					);
+
+			if (!context.Genre.Any())
+
+
+				context.Genre.AddRange(
+				new Genre
 				{
-					Title = "When Harry Met Sally",
-					ReleaseDate = DateTime.Parse("1989-2-12"),
-					Genre = "Romantic Comedy",
-					Rating = "R",
-					Price = 7.99M
+					Name = "Action"
 				},
-				new Movie
+				new Genre
 				{
-					Title = "Ghostbusters ",
-					ReleaseDate = DateTime.Parse("1984-3-13"),
-					Genre = "Comedy",
-					Rating = "PG",
-					Price = 8.99M
+					Name = "Comedy"
 				},
-				new Movie
+				new Genre
 				{
-					Title = "Ghostbusters 2",
-					ReleaseDate = DateTime.Parse("1986-2-23"),
-					Genre = "Comedy",
-					Rating = "PG",
-					Price = 9.99M
+					Name = "Drama"
 				},
-				new Movie
+				new Genre
 				{
-					Title = "Rio Bravo",
-					ReleaseDate = DateTime.Parse("1959-4-15"),
-					Genre = "Western",
-					Rating = "Not Rated",
-					Price = 3.99M
+					Name = "Fantasy"
+				},
+				new Genre
+				{
+					Name = "Horror"
+				},
+				new Genre
+				{
+					Name = "Mystery"
+				},
+				new Genre
+				{
+					Name = "Romance"
+				},
+				new Genre
+				{
+					Name = "Thriller"
 				}
-			);
+				);
+			//	new Movie
+			//	{
+			//		Title = "When Harry Met Sally",
+			//		ReleaseDate = DateTime.Parse("1989-2-12"),
+			//		Genre = "Romantic Comedy",
+			//		Rating = "R",
+			//		Price = 7.99M
+			//	},
+			//	new Movie
+			//	{
+			//		Title = "Ghostbusters ",
+			//		ReleaseDate = DateTime.Parse("1984-3-13"),
+			//		Genre = "Comedy",
+			//		Rating = "PG",
+			//		Price = 8.99M
+			//	},
+			//	new Movie
+			//	{
+			//		Title = "Ghostbusters 2",
+			//		ReleaseDate = DateTime.Parse("1986-2-23"),
+			//		Genre = "Comedy",
+			//		Rating = "PG",
+			//		Price = 9.99M
+			//	},
+			//	new Movie
+			//	{
+			//		Title = "Rio Bravo",
+			//		ReleaseDate = DateTime.Parse("1959-4-15"),
+			//		Genre = "Western",
+			//		Rating = "Not Rated",
+			//		Price = 3.99M
+			//	}
+			//);
 			context.SaveChanges();
 		}
 	}
