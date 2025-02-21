@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -74,8 +75,9 @@ namespace MvcMovie.Controllers
             return View(movie);
         }
 
-        // GET: Movies/Create
-        public IActionResult Create()
+		// GET: Movies/Create
+		[Authorize]
+		public IActionResult Create()
         {
             //ViewBag.GenreId = new SelectList(_context.Genre, "Id", "Name");
             //ViewBag.DirectorId = new SelectList(_context.Director, "Id", "Name");
@@ -88,6 +90,7 @@ namespace MvcMovie.Controllers
 		// POST: Movies/Create
 		// To protect from overposting attacks, enable the specific properties you want to bind to.
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[Authorize]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create(MovieCreateViewModel movieViewModel)
@@ -118,8 +121,10 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movie.FindAsync(id);
-            if (movie == null)
+            //var movie = await _context.Movie.FindAsync(id);
+			var movie = await _context.Movie.
+				Include(m => m.Genre).Include(m => m.Director).FirstOrDefaultAsync(m => m.Id == id);
+			if (movie == null)
             {
                 return NotFound();
             }
@@ -161,16 +166,17 @@ namespace MvcMovie.Controllers
             return View(movie);
         }
 
-        // GET: Movies/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+		// GET: Movies/Delete/5
+		[Authorize]
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var movie = await _context.Movie.
+                Include(m => m.Genre).Include(m => m.Director).FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
                 return NotFound();
@@ -179,8 +185,9 @@ namespace MvcMovie.Controllers
             return View(movie);
         }
 
-        // POST: Movies/Delete/5
-        [HttpPost, ActionName("Delete")]
+		// POST: Movies/Delete/5
+		[Authorize]
+		[HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

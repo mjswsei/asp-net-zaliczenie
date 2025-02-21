@@ -20,8 +20,29 @@ public static class SeedData
 					{
 						Name = "Krzysztof Kieślowski",
 						BirthDate = DateTime.Parse("1941-06-27")
+					},
+					new Director
+					{
+						Name = "Roman Polański",
+						BirthDate = DateTime.Parse("1933-08-18")
+					},
+					new Director
+					{
+						Name = "Andrzej Żuławski",
+						BirthDate = DateTime.Parse("1940-11-22")
+					},
+					new Director
+					{
+						Name = "Andrzej Wajda",
+						BirthDate = DateTime.Parse("1926-03-06")
+					},
+					new Director
+					{
+						Name = "David Lynch",
+						BirthDate = DateTime.Parse("1946-01-20")
 					}
-					);
+				);
+				
 
 			if (!context.Genre.Any())
 
@@ -60,39 +81,6 @@ public static class SeedData
 					Name = "Thriller"
 				}
 				);
-			//	new Movie
-			//	{
-			//		Title = "When Harry Met Sally",
-			//		ReleaseDate = DateTime.Parse("1989-2-12"),
-			//		Genre = "Romantic Comedy",
-			//		Rating = "R",
-			//		Price = 7.99M
-			//	},
-			//	new Movie
-			//	{
-			//		Title = "Ghostbusters ",
-			//		ReleaseDate = DateTime.Parse("1984-3-13"),
-			//		Genre = "Comedy",
-			//		Rating = "PG",
-			//		Price = 8.99M
-			//	},
-			//	new Movie
-			//	{
-			//		Title = "Ghostbusters 2",
-			//		ReleaseDate = DateTime.Parse("1986-2-23"),
-			//		Genre = "Comedy",
-			//		Rating = "PG",
-			//		Price = 9.99M
-			//	},
-			//	new Movie
-			//	{
-			//		Title = "Rio Bravo",
-			//		ReleaseDate = DateTime.Parse("1959-4-15"),
-			//		Genre = "Western",
-			//		Rating = "Not Rated",
-			//		Price = 3.99M
-			//	}
-			//);
 			context.SaveChanges();
 		}
 	}
